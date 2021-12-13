@@ -28,6 +28,7 @@ const App = () => {
             },
             headerTitleAlign: 'center',
             headerTintColor: '#fff',
+            headerTitle: 'Details',
           }}
         />
       </Stack.Navigator>
