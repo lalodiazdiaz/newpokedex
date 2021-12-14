@@ -7,6 +7,7 @@ import {
   Image,
   ScrollView,
   ImageBackground,
+  TouchableOpacity,
 } from 'react-native';
 import {getpokeDetails} from '../servicios/servicio';
 
@@ -42,6 +43,16 @@ const Details = ({route, navigation}) => {
                   uri: `https://img.pokemondb.net/artwork/${pokeDetail.name}.jpg`,
                 }}
               />
+              <TouchableOpacity>
+                <View
+                  style={{
+                    flexDirection: 'row',
+                    justifyContent: 'space-evenly',
+                    backgroundColor: '#d7dc7a',
+                  }}>
+                  <Text style={styles.title}>Shiny version</Text>
+                </View>
+              </TouchableOpacity>
               {/*Types*/}
               <View
                 style={{
