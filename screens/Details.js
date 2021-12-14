@@ -8,6 +8,7 @@ import {
   ScrollView,
   ImageBackground,
   TouchableOpacity,
+  TouchableHighlight,
 } from 'react-native';
 import {getpokeDetails} from '../servicios/servicio';
 
@@ -18,6 +19,7 @@ const Details = ({route, navigation}) => {
 
   const [pokeDetail, setPokeDetail] = useState();
   const [loaded, setLoaded] = useState(false);
+  const [shiny, setShiny] = useState(false);
 
   useEffect(() => {
     getpokeDetails(pokeName).then(pokeData => {
@@ -36,23 +38,77 @@ const Details = ({route, navigation}) => {
                 #{pokeDetail.id}{' '}
                 {pokeDetail.name.replace(/^\w/, c => c.toUpperCase())}
               </Text>
-              <Image
-                resizeMode="stretch"
-                style={styles.image}
-                source={{
-                  uri: `https://img.pokemondb.net/artwork/${pokeDetail.name}.jpg`,
-                }}
-              />
-              <TouchableOpacity>
-                <View
-                  style={{
-                    flexDirection: 'row',
-                    justifyContent: 'space-evenly',
-                    backgroundColor: '#d7dc7a',
-                  }}>
-                  <Text style={styles.title}>Shiny version</Text>
+              {shiny == false ? (
+                <View style={{marginBottom: 5}}>
+                  <Image
+                    resizeMode="stretch"
+                    style={styles.image}
+                    source={{
+                      uri: `https://img.pokemondb.net/artwork/${pokeDetail.name}.jpg`,
+                    }}
+                  />
+                  <TouchableHighlight
+                    onPress={() => {
+                      setShiny(!shiny);
+                    }}>
+                    <View
+                      style={{
+                        flexDirection: 'row',
+                        justifyContent: 'space-evenly',
+                        backgroundColor: '#000000',
+                        alignItems: 'center',
+                      }}>
+                      <Image
+                        resizeMode="stretch"
+                        style={styles.imageShiny}
+                        source={require('../assets/image/normal.png')}
+                      />
+                      <Text style={styles.txtbtn}>Normal version</Text>
+                      <Image
+                        resizeMode="stretch"
+                        style={styles.imageBtn}
+                        source={require('../assets/image/change.png')}
+                      />
+                    </View>
+                  </TouchableHighlight>
                 </View>
-              </TouchableOpacity>
+              ) : (
+                <View style={{marginBottom: 5}}>
+                  <Image
+                    resizeMode="stretch"
+                    style={styles.image}
+                    source={{
+                      uri: `https://www.pokebip.com/pokedex-images/300-shiny/${pokeDetail.id}.png`,
+                    }}
+                  />
+
+                  <TouchableHighlight
+                    onPress={() => {
+                      setShiny(!shiny);
+                    }}>
+                    <View
+                      style={{
+                        flexDirection: 'row',
+                        justifyContent: 'space-evenly',
+                        backgroundColor: '#000000',
+                        alignItems: 'center',
+                      }}>
+                      <Image
+                        resizeMode="stretch"
+                        style={styles.imageShiny}
+                        source={require('../assets/image/shiny.png')}
+                      />
+                      <Text style={styles.txtbtn}>Shiny version</Text>
+                      <Image
+                        resizeMode="stretch"
+                        style={styles.imageBtn}
+                        source={require('../assets/image/change.png')}
+                      />
+                    </View>
+                  </TouchableHighlight>
+                </View>
+              )}
+
               {/*Types*/}
               <View
                 style={{
@@ -165,7 +221,7 @@ const Details = ({route, navigation}) => {
               </View>
 
               {/**Moves */}
-              {/**Abilities */}
+
               <View
                 style={{
                   flexDirection: 'row',
@@ -275,5 +331,21 @@ const styles = StyleSheet.create({
   imageB: {
     flex: 1,
     justifyContent: 'center',
+  },
+  imageShiny: {
+    height: 50,
+    width: 50,
+    marginRight: 10,
+    marginLeft: 10,
+  },
+  imageBtn: {
+    height: 30,
+    width: 30,
+    marginRight: 10,
+    marginLeft: 10,
+  },
+  txtbtn: {
+    color: '#fff',
+    fontSize: 20,
   },
 });
