@@ -18,6 +18,7 @@ import {
   getpokeGalar,
   getpokeFormas,
   getpokeMega,
+  getpokeGiga,
 } from '../servicios/servicio';
 
 const image = {uri: 'https://cdn.wallpapersafari.com/17/45/F64GRq.png'};
@@ -34,6 +35,7 @@ const Home = ({navigation}) => {
   const [galar, setGalar] = useState();
   const [formas, setFormas] = useState();
   const [mega, setMega] = useState();
+  const [gigamax, setGigamax] = useState();
 
   const getData = () => {
     return Promise.all([
@@ -47,6 +49,7 @@ const Home = ({navigation}) => {
       getpokeGalar(),
       getpokeFormas(),
       getpokeMega(),
+      getpokeGiga(),
     ]);
   };
 
@@ -63,6 +66,7 @@ const Home = ({navigation}) => {
         galarData,
         formasData,
         megasData,
+        gigaData,
       ]) => {
         setKanto(kantoData);
         setJohto(johtoData);
@@ -74,6 +78,7 @@ const Home = ({navigation}) => {
         setGalar(galarData);
         setFormas(formasData);
         setMega(megasData);
+        setGigamax(gigaData);
         setLoaded(true);
       },
     );
@@ -147,6 +152,13 @@ const Home = ({navigation}) => {
                 navigation={navigation}
               />
             </View>
+            {/* <View>
+              <Lista
+                title="Gigamax"
+                content={gigamax}
+                navigation={navigation}
+              />
+            </View> */}
             <View>
               <Lista
                 title="Other Forms"

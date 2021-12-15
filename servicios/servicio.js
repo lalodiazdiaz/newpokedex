@@ -50,6 +50,10 @@ export const getpokeMega = async () => {
   const resp = await axios.get(`${pokeUrl}pokemon?limit=47&offset=930`);
   return resp.data.results;
 };
+export const getpokeGiga = async () => {
+  const resp = await axios.get(`${pokeUrl}pokemon?limit=34&offset=1083`);
+  return resp.data.results;
+};
 
 //service detail pokemon
 
